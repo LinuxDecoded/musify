@@ -122,8 +122,8 @@ const Dashboard = ({code}) => {
 
     return(
         <div className="container" >
-            {displayName==='' ? <p>Getting user details...</p> : <p>Welcome {displayName}</p>}
-            <input type="search" placeholder="Search Song/Artist" value={search} onChange={e => setSearch(e.target.value)} />
+            {displayName==='' ? <p className="user-greeting">Getting user details...</p> : <p className="user-greeting">Welcome {displayName}</p>}
+            <input className="search-bar" type="search" placeholder="Search Song/Artist" value={search} onChange={e => setSearch(e.target.value)} />
             
             {searchResults.map(track => (
                 <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
