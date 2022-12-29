@@ -20,11 +20,16 @@ const Dashboard = ({code}) => {
     const [displayName, setDisplayName] = useState('')
     const [topSongs, setTopSongs] = useState([])
     const [showLyrics, setShowLyrics] = useState(false)
+    const [playing, setPlaying] = useState()
 
     const chooseTrack = (track)=> {
         setPlayingTrack(track)
         setSearch("")
         setLyrics("")
+    }
+
+    const playingState = (playing)=>{
+        setPlaying(playing)
     }
 
     useEffect(() => {
@@ -131,8 +136,8 @@ const Dashboard = ({code}) => {
             </div>)}
             
             <div>
-                {playingTrack && (<button onClick={()=>setShowLyrics(!showLyrics)}>Show Lyrics</button>)}
-                <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+                {(playing && playingTrack) && (<button onClick={()=>setShowLyrics(!showLyrics)}>Show Lyrics</button>)}
+                <Player accessToken={accessToken} trackUri={playingTrack?.uri} playingState={playingState}/>
             </div>
 
             {showLyrics && (
