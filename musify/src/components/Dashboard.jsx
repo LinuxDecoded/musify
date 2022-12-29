@@ -4,6 +4,7 @@ import SpotifyWebApi from "spotify-web-api-node"
 import useAuth from "./useAuth"
 import TrackSearchResult from "./TrackSearchResult"
 import Player from "./Player"
+import TopSongs from "./TopSongs"
 
 
 const spotifyApi = new SpotifyWebApi({
@@ -16,6 +17,9 @@ const Dashboard = ({code}) => {
     const [searchResults, setSearchResults] = useState([])
     const [playingTrack, setPlayingTrack] = useState()
     const [lyrics, setLyrics] = useState("")
+    const [displayName, setDisplayName] = useState('')
+    const [topSongs, setTopSongs] = useState([])
+    const [showLyrics, setShowLyrics] = useState(false)
 
     const chooseTrack = (track)=> {
         setPlayingTrack(track)
@@ -69,30 +73,73 @@ const Dashboard = ({code}) => {
                 })
             )
         })
-    
+
         return () => (cancel = true)
       }, [search, accessToken])
 
+      useEffect(()=>{
+        spotifyApi.getMe()
+            .then((data)=>{
+                setDisplayName(data.body.display_name)
+            })
+            .catch((err)=>{
+                console.log("Problem in fetching user details!", err)
+            })
+      },[accessToken])
+
+      useEffect(()=>{
+        if(!accessToken) return
+        spotifyApi.getMyTopTracks()
+            .then((data)=>{
+                setTopSongs(
+                    data.body.items.map(track => {
+                        const smallestAlbumImage = track.album.images.reduce(
+                            (smallest, image) => {
+                                if (image.height < smallest.height) return image
+                                return smallest
+                            },
+                        track.album.images[0]
+                        )
+            
+                        return {
+                            artist: track.artists[0].name,
+                            title: track.name,
+                            uri: track.uri,
+                            albumUrl: smallestAlbumImage.url,
+                        }
+                    })
+                )
+            })
+            .catch((err)=>{
+                console.log("Can't fetch top songs!", err)
+            })
+      },[accessToken])
 
     return(
         <div className="container" >
+            {displayName==='' ? <p>Getting user details...</p> : <p>Welcome {displayName}</p>}
             <input type="search" placeholder="Search Song/Artist" value={search} onChange={e => setSearch(e.target.value)} />
             
-            <div>
-                {searchResults.map(track => (
-                    <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
+            {searchResults.map(track => (
+                <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
+            ))}
+
+            {searchResults.length === 0 && (<div className="top-song-container">
+                {topSongs.length!=0 && topSongs.map(track=>(
+                    <TopSongs track={track} key={track.uri} chooseTrack={chooseTrack}/>
                 ))}
-                {searchResults.length === 0 && (
-                    <div style={{ whiteSpace: "pre" }}>
-                        {lyrics}
-                    </div>
-                )}
-            </div>
+            </div>)}
             
-        
             <div>
+                {playingTrack && (<button onClick={()=>setShowLyrics(!showLyrics)}>Show Lyrics</button>)}
                 <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
             </div>
+
+            {showLyrics && (
+                <div style={{ whiteSpace: "pre" }}>
+                    {lyrics}
+                </div>
+            )}
         </div >
     )
 }
