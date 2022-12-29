@@ -1,5 +1,5 @@
 const TrackSearchResult = ({ track, chooseTrack }) => {
-    function handlePlay() {
+    const handlePlay = () =>{
       chooseTrack(track)
     }
   
