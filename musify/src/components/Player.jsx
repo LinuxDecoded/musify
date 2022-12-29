@@ -32,6 +32,7 @@ const Player = ({ accessToken, trackUri, playingState }) => {
         }}
         play={play}
         uris={trackUri ? [trackUri] : []}
+        autoPlay={true}
     />
     </>
   )
