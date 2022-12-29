@@ -137,7 +137,7 @@ const Dashboard = ({code}) => {
             
             <div>
                 {(playing && playingTrack) && (<button onClick={()=>setShowLyrics(!showLyrics)}>Show Lyrics</button>)}
-                <Player accessToken={accessToken} trackUri={playingTrack?.uri} playingState={playingState}/>
+                {playingTrack && <Player accessToken={accessToken} trackUri={playingTrack?.uri} playingState={playingState}/>}
             </div>
 
             {showLyrics && (
