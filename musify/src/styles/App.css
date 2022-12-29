@@ -1,0 +1,46 @@
+.main-page{
+    display:flex;
+}
+.login{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: linear-gradient(180deg,#46b071,#38b438) ;
+    
+}
+.login-img{
+    width: 200px;
+    height: 200px; 
+}
+.main-page > {
+    font-size:x-large;
+}
+
+.login > a{
+    padding: 15px;
+    border-radius: 99px;
+    background-color: black;
+    font-weight: 800;
+    color:#eaf6ed;
+    text-decoration: none;
+}
+.musify{
+    font-family: 'Arvo', serif;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Montserrat Subrayada', sans-serif;
+    font-size-adjust: 0.2;
+    font-size: 120px;
+    text-align:center;
+    margin-top: 25px;
+    
+}
+.container{
+    background: linear-gradient(180deg,#7046b0,#44148b);
+}
+.player{
+    top: 100%;
+    position:sticky;
+}
+
+
+    
