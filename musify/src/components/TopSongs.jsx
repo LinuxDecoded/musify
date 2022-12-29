@@ -9,7 +9,7 @@ const TopSongs = ({track, chooseTrack}) => {
           <img src={track.albumUrl}/>
           <div>
             <div className="track-title">{track.title}</div>
-            <div className="track-title">{track.artist}</div>
+            <div className="track-artist">{track.artist}</div>
           </div>
         </div>
       )
