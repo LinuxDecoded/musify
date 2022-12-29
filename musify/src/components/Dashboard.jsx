@@ -121,7 +121,7 @@ const Dashboard = ({code}) => {
       },[accessToken])
 
     return(
-        <div className="container" >
+        <div className="container" style={showLyrics ? {height: '100%'} : null}>
             {displayName==='' ? <p className="user-greeting">Getting user details...</p> : <p className="user-greeting">Welcome {displayName}</p>}
             <input className="search-bar" type="search" placeholder="Search Song/Artist" value={search} onChange={e => setSearch(e.target.value)} />
             
@@ -135,7 +135,7 @@ const Dashboard = ({code}) => {
                 ))}
             </div>)}
             
-            <div>
+            <div className="player">
                 {(playing && playingTrack) && (<button onClick={()=>setShowLyrics(!showLyrics)}>Show Lyrics</button>)}
                 {playingTrack && <Player accessToken={accessToken} trackUri={playingTrack?.uri} playingState={playingState}/>}
             </div>
