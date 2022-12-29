@@ -35,10 +35,13 @@
     
 }
 .container{
+    height: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg,#7046b0,#44148b);
+    align-items: center;
+    background: linear-gradient(#eaf6ed, #46b071);
 }
+
 .player{
     position:sticky;
     top: 100%;
@@ -51,5 +54,29 @@
 }
 
 .top-song-card{
+    display: flex;
+    gap: 1rem;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #333;
+}
 
+.user-greeting{
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+}
+
+.search-bar{
+    background: #333;
+    border-radius: 5px;
+}
+
+.track-title{
+    color: #eaf6ed;
+}
+
+.track-artist{
+    color: #95e2a8;
 }
