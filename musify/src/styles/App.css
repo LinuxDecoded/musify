@@ -35,11 +35,13 @@
     
 }
 .container{
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(180deg,#7046b0,#44148b);
 }
 .player{
-    top: 100%;
     position:sticky;
+    top: 100%;
 }
 
 .top-song-container{
