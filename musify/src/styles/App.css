@@ -78,9 +78,25 @@
 }
 
 .search-bar{
+    width: 20vw;
+    height: 30px;
     background: #333;
-    border-radius: 5px;
+    border-radius: 10px;
     color: #eaf6ed;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+::placeholder{
+    color: #eaf6ed;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+input:focus::placeholder{
+    color: transparent;
 }
 
 .search-results{
@@ -116,6 +132,8 @@
     height: 30px;
     margin-block: 10px;
     border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
     background: #333;
     color: #eaf6ed;
 }
@@ -123,7 +141,7 @@
 .lyrics{
     text-align: center;
     width: 50vw;
-    height: 68vh;
+    height: 65vh;
     border-radius: 10px;
     padding: 10px 0;
     color: #333;
