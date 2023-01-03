@@ -5,8 +5,9 @@ import '../styles/App.css'
 const Player = ({ accessToken, trackUri, playingState }) => {
   const [play, setPlay] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
-  playingState(isPlaying)
+  
   useEffect(() => setPlay(true), [trackUri])
+  useEffect(()=>playingState(isPlaying), [isPlaying])
   if (!accessToken) return null
   return (
     <>
