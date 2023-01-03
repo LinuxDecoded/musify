@@ -13,7 +13,7 @@ const Login = () => {
                 <img className='login-img' src={logo} alt="logo" />
                 <p className='musify'>musify</p >
             </div>
-            <a href={AuthUrl}>LOGIN WITH MUSIFY</a>
+            <a href={AuthUrl}>LOGIN WITH SPOTIFY</a>
         </div>
     )
 }
