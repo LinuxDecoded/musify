@@ -11,7 +11,7 @@ const Player = ({ accessToken, trackUri, playingState }) => {
   if (!accessToken) return null
   return (
     <>
-    {(trackUri && isPlaying===false) && <p>Playing...</p>}
+    {(trackUri && isPlaying===false) && <p style={{fontSize: '18px', color: '#eaf6ed', fontWeight: 'bold'}}>Playing...</p>}
     <SpotifyPlayer 
         token={accessToken}
         showSaveIcon
@@ -22,13 +22,16 @@ const Player = ({ accessToken, trackUri, playingState }) => {
             setIsPlaying(true)
         }}
         styles={{
-          activeColor: '#fff',
+          height: '64px',
+          activeColor: '#46b071',
           bgColor: '#333',
           color: '#fff',
           loaderColor: '#fff',
           sliderColor: '#46b071',
           trackArtistColor: '#ccc',
           trackNameColor: '#fff',
+          sliderHandleBorderRadius: '10px',
+          sliderTrackBorderRadius: '10px',
           
         }}
         play={play}

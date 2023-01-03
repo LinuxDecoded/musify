@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(#eaf6ed, #46b071);
+    background: linear-gradient(#46b071, #eaf6ed);
 }
 
 ::-webkit-scrollbar{
@@ -54,23 +54,39 @@
 }
 
 ::-webkit-scrollbar-track{
-    background: linear-gradient(#eaf6ed, #46b071);
+    background: linear-gradient(#46b071, #eaf6ed);
 }
 
 .user-greeting{
     font-weight: bold;
-    font-size: 24px;
+    font-size: 30px;
     color: #333;
+    margin-block: 20px;
 }
 
 .player{
-    position: relative;
+    text-align: center;
+    position: fixed;
+    bottom: 35px;
+}
+
+.player > div{
+    border-radius: 10px;
+    background: #333;
+    padding: 10px;
+    min-width: 90vw;
 }
 
 .search-bar{
     background: #333;
     border-radius: 5px;
     color: #eaf6ed;
+}
+
+.search-results{
+    max-height: 70vh;
+    margin-block: 20px;
+    overflow: auto;
 }
 
 .top-song-container{
@@ -94,4 +110,25 @@
 
 .track-artist{
     color: #95e2a8;
+}
+
+.lyrics-btn{
+    height: 30px;
+    margin-block: 10px;
+    border-radius: 10px;
+    background: #333;
+    color: #eaf6ed;
+}
+
+.lyrics{
+    text-align: center;
+    width: 50vw;
+    height: 68vh;
+    border-radius: 10px;
+    padding: 10px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    overflow: auto;
+    margin-block: 20px;
 }
