@@ -28,7 +28,7 @@ const Player = ({ accessToken, trackUri, playingState }) => {
           color: '#fff',
           loaderColor: '#fff',
           sliderColor: '#46b071',
-          trackArtistColor: '#46b071',
+          trackArtistColor: '#95e2a8',
           trackNameColor: '#fff',
           sliderHandleBorderRadius: '10px',
           sliderTrackBorderRadius: '10px',
