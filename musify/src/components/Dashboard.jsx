@@ -125,25 +125,32 @@ const Dashboard = ({code}) => {
             {displayName==='' ? <p className="user-greeting">Getting user details...</p> : <p className="user-greeting">Welcome {displayName}</p>}
             <input className="search-bar" type="search" placeholder="Search Song/Artist" value={search} onChange={e => setSearch(e.target.value)} />
             
-            <div className="search-results">
+            {searchResults.length != 0 && (<div className="search-results">
                 {searchResults.map(track => (
                     <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
                 ))}
-            </div>
+            </div>)}
 
-            {searchResults.length === 0 && (<div className="top-song-container">
+            {(!showLyrics && searchResults.length === 0) && (<div className="top-song-container">
                 {topSongs.length!=0 && topSongs.map(track=>(
                     <TopSongs track={track} key={track.uri} chooseTrack={chooseTrack}/>
                 ))}
             </div>)}
             
-            <div className="player">
-                {(playing && playingTrack) && (<button onClick={()=>setShowLyrics(!showLyrics)}>Show Lyrics</button>)}
-                {playingTrack && <Player accessToken={accessToken} trackUri={playingTrack?.uri} playingState={playingState}/>}
-            </div>
+            
+            {playingTrack && 
+                (
+                    <div className="player">
+                    {(searchResults.length === 0 && playing && playingTrack) && (<button className="lyrics-btn" onClick={()=>setShowLyrics(!showLyrics)}>Show/ Hide Lyrics</button>)}
+                    <div>
+                        <Player accessToken={accessToken} trackUri={playingTrack?.uri} playingState={playingState}/>
+                    </div>
+                    </div>
+                )
+            }
 
-            {showLyrics && (
-                <div style={{ whiteSpace: "pre" }}>
+            {(searchResults.length === 0 && showLyrics) && (
+                <div className="lyrics" style={{ whiteSpace: "pre" }}>
                     {lyrics}
                 </div>
             )}
