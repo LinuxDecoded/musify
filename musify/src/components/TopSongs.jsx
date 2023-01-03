@@ -5,7 +5,7 @@ const TopSongs = ({track, chooseTrack}) => {
         chooseTrack(track)
       }
     return (
-        <div className='top-song-card' style={{ cursor: "pointer" }} onClick={handlePlay}>
+        <div className='song-card' style={{ cursor: "pointer" }} onClick={handlePlay}>
           <img src={track.albumUrl}/>
           <div>
             <div className="track-title">{track.title}</div>

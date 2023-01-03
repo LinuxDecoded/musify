@@ -121,13 +121,15 @@ const Dashboard = ({code}) => {
       },[accessToken])
 
     return(
-        <div className="container" style={showLyrics ? {height: '100%'} : null}>
+        <div className="container">
             {displayName==='' ? <p className="user-greeting">Getting user details...</p> : <p className="user-greeting">Welcome {displayName}</p>}
             <input className="search-bar" type="search" placeholder="Search Song/Artist" value={search} onChange={e => setSearch(e.target.value)} />
             
-            {searchResults.map(track => (
-                <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
-            ))}
+            <div className="search-results">
+                {searchResults.map(track => (
+                    <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
+                ))}
+            </div>
 
             {searchResults.length === 0 && (<div className="top-song-container">
                 {topSongs.length!=0 && topSongs.map(track=>(
