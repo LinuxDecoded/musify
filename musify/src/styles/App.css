@@ -80,13 +80,14 @@
 .search-bar{
     width: 20vw;
     height: 30px;
-    background: #333;
+    margin-bottom: 10px;
     border-radius: 10px;
-    color: #eaf6ed;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 10px;
+    background: #333;
+    color: #eaf6ed;
+    border-color: transparent;
 }
 
 ::placeholder{
