@@ -36,7 +36,7 @@ const Dashboard = ({code}) => {
         if(!playingTrack) return
     
         axios
-            .get("http://64.227.180.169:3001/lyrics", {
+            .get("https://64.227.180.169:3001/lyrics", {
             params: {
                 track: playingTrack.title,
                 artist: playingTrack.artist,
