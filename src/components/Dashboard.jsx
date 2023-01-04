@@ -13,7 +13,6 @@ const spotifyApi = new SpotifyWebApi({
 
 const Dashboard = ({code}) => {
     const accessToken = useAuth(code)
-    console.log(accessToken)
     const [search, setSearch] = useState("")
     const [searchResults, setSearchResults] = useState([])
     const [playingTrack, setPlayingTrack] = useState()
