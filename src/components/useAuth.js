@@ -15,11 +15,10 @@ const useAuth = (code) => {
                 setAccessToken(res.data.accessToken)
                 setRefreshToken(res.data.refreshToken)
                 setExpiresIn(res.data.expiresIn)
-                console.log('Atoken from chook ',res.data.accessToken)
                 window.history.pushState({}, null, "/")
             })
             .catch((err) => {
-                // window.location = "/"
+                window.location = "/"
                 console.log(err)
             })
     }, [])
