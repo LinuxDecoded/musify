@@ -8,7 +8,7 @@ const useAuth = (code) => {
 
     useEffect(()=> {
         axios
-            .post("http://139.59.12.138/login", {
+            .post("https://139.59.12.138/login", {
                 code,
             })
             .then(res => {
@@ -28,7 +28,7 @@ const useAuth = (code) => {
         if(!accessToken || !expiresIn) return 
         const interval = setInterval(() => {
             axios
-                .post("http://139.59.12.138/refresh", {refreshToken, })
+                .post("https://139.59.12.138/refresh", {refreshToken, })
                 .then(res => {
                     setAccessToken(res.data.accessToken)
                     setExpiresIn(res.data.expiresIn)
