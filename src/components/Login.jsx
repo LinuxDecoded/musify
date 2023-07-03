@@ -1,9 +1,10 @@
 import React from 'react'
 import '../styles/App.css'
 import logo from '../assets/logo.svg'
+import spotifyApi from './spotifyApi'
 
-
-const AuthUrl = 'https://accounts.spotify.com/authorize?client_id=27b1cecea7ef4b93a30575c8f5c997d6&response_type=code&redirect_uri=http://localhost:5173&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20user-top-read'
+const scopes = ['streaming', 'user-read-email', 'user-read-private', 'user-library-read', 'user-library-modify', 'user-read-playback-state', 'user-modify-playback-state', 'user-read-currently-playing', 'user-read-recently-played', 'playlist-read-private', 'playlist-read-collaborative', 'playlist-modify-public', 'playlist-modify-private', 'user-top-read', 'user-read-playback-position', 'user-read-recently-played', 'user-follow-read', 'user-follow-modify'];
+const authUrl = spotifyApi.createAuthorizeURL(scopes)
 
 const Login = () => {
     return(
@@ -13,7 +14,7 @@ const Login = () => {
                 <img className='login-img' src={logo} alt="logo" />
                 <p className='musify'>musify</p >
             </div>
-            <a href={AuthUrl}>LOGIN WITH SPOTIFY</a>
+            <a href={authUrl}>LOGIN WITH SPOTIFY</a>
         </div>
     )
 }
