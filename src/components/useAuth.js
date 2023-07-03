@@ -7,34 +7,42 @@ const useAuth = (code) => {
     const [expiresIn, setExpiresIn] = useState()
 
     useEffect(()=> {
-        axios
-            .post("http://localhost:3001/login", {
-                code,
-            })
-            .then(res => {
-                setAccessToken(res.data.accessToken)
-                setRefreshToken(res.data.refreshToken)
-                setExpiresIn(res.data.expiresIn)
-                window.history.pushState({}, null, "/")
-            })
-            .catch((err) => {
-                window.location = "/"
-                console.log(err)
-            })
+        const getAccessToken = async () => {
+            const res = await axios.post("http://localhost:3001/login", { code })
+            const { accessToken, refreshToken, expiresIn } = res.data
+            localStorage.setItem("refreshToken", refreshToken)
+            localStorage.setItem("expiresIn", Date.now() + (expiresIn * 1000))
+            setAccessToken(accessToken)
+            setRefreshToken(refreshToken)
+            setExpiresIn(expiresIn)
+            window.history.pushState({}, null, "/")
+        }
+        
+        // if(Date.now() >= expiresIn) {
+        //     getAccessToken()
+        // }
+        getAccessToken()
     }, [])
 
     useEffect(() => {
+
+        const refreshAccessToken = async () => {
+            try {
+                const res = await axios.post("http://localhost:3001/refresh", { refreshToken })
+                const { accessToken, expiresIn } = res.data
+                localStorage.setItem("expiresIn", Date.now() + (expiresIn * 1000))
+                setAccessToken(accessToken)
+                setExpiresIn(expiresIn)
+            }
+            catch (err) {
+                console.log(err)
+                window.location = "/"
+            }
+        }
+
         if(!accessToken || !expiresIn) return 
         const interval = setInterval(() => {
-            axios
-                .post("http://localhost:3001/refresh", {refreshToken, })
-                .then(res => {
-                    setAccessToken(res.data.accessToken)
-                    setExpiresIn(res.data.expiresIn)
-                })
-                .catch(() => {
-                    window.location = "/"
-                })
+            refreshAccessToken()
         }, (expiresIn - 60) * 1000)
 
         return () => clearInterval(interval)
