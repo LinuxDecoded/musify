@@ -93,8 +93,15 @@ const Dashboard = ({ code }) => {
     
     const getDisplayName = async () => {
         try {
-            const res = await spotifyApi.getMe();
-            setDisplayName(res.body.display_name);
+            // const res = await spotifyApi.getMe();
+            const res = await axios.get("https://api.spotify.com/v1/me", {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            const profile = res.data;
+            console.log(profile);
+            setDisplayName(profile.display_name);
         } catch (err) {
             console.log(err);
         }
@@ -142,7 +149,7 @@ const Dashboard = ({ code }) => {
           {displayName === "" ? (
             <p className="user-greeting">Getting user details...</p>
           ) : (
-            <p className="user-greeting">Welcome {displayName}</p>
+            <p className="user-greeting">Welcome {displayName || "User"}</p>
           )}
           <input
             className="search-bar"
