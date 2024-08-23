@@ -1,6 +1,10 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 
+const server = axios.create({
+    baseURL: import.meta.env.VITE_SERVER_URL,
+})
+
 const useAuth = (code) => {
     const [accessToken, setAccessToken] = useState()
     const [refreshToken, setRefreshToken] = useState()
@@ -8,7 +12,7 @@ const useAuth = (code) => {
 
     useEffect(()=> {
         const getAccessToken = async () => {
-            const res = await axios.post("http://localhost:3001/login", { code })
+            const res = await server.post("/login", { code })
             const { accessToken, refreshToken, expiresIn } = res.data
             localStorage.setItem("refreshToken", refreshToken)
             localStorage.setItem("expiresIn", Date.now() + (expiresIn * 1000))
@@ -28,7 +32,7 @@ const useAuth = (code) => {
 
         const refreshAccessToken = async () => {
             try {
-                const res = await axios.post("http://localhost:3001/refresh", { refreshToken })
+                const res = await server.post("/refresh", { refreshToken })
                 const { accessToken, expiresIn } = res.data
                 localStorage.setItem("expiresIn", Date.now() + (expiresIn * 1000))
                 setAccessToken(accessToken)
