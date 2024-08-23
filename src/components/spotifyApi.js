@@ -11,6 +11,4 @@ const spotifyApi = new SpotifyWebApi({
     redirectUri: import.meta.env.VITE_REDIRECT_URI,
 });
 
-console.log('vite client id is: ', import.meta.env.VITE_CLIENT_ID);
-
 export default spotifyApi;
